@@ -86,13 +86,13 @@
     //
     "matrix": {
         "req": {
-            "threadpoolctl": [""],
+            // "threadpoolctl": [""],
             // "numpy": ["1.6", "1.7"],
             // "six": ["", null],  // test with and without six installed
             // "pip+emcee": [""]   // emcee is only available for install with pip.
         },
         // "env": {"OMP_NUM_THREADS": ["1"], "MKL_NUM_THREADS": ["1"]},
-        // "env_nobuild": {"OMP_NUM_THREADS": ["1"], "MKL_NUM_THREADS": ["1"]},
+        "env_nobuild": {"OMP_NUM_THREADS": ["1"], "MKL_NUM_THREADS": ["1"]},
     },
 
     // Combinations of libraries/python versions can be excluded/included
