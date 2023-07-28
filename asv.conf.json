@@ -20,13 +20,19 @@
 
     // Customizable commands for building, installing, and
     // uninstalling the project. See asv.conf.json documentation.
-    //
-    // "install_command": ["in-dir={env_dir} python -mpip install {wheel_file}"],
-    // "uninstall_command": ["return-code=any python -mpip uninstall -y {project}"],
-    // "build_command": [
-    //     "python setup.py build",
-    //     "PIP_NO_BUILD_ISOLATION=false python -mpip wheel --no-deps --no-index -w {build_cache_dir} {build_dir}"
-    // ],
+
+    "install_command": [
+        "in-dir={env_dir} python -m pip install {wheel_file}",
+        // "in-dir={build_dir} python -m pip install ."
+    ],
+    "uninstall_command": [
+        "return-code=any python -m pip uninstall -y {project}"
+    ],
+    "build_command": [
+        "python -m build --skip-dependency-check --no-isolation --outdir {build_cache_dir} {build_dir}",
+        // "python setup.py build",
+        // "PIP_NO_BUILD_ISOLATION=false python -m pip wheel --no-deps --no-index -w {build_cache_dir} {build_dir}"
+    ],
 
     // List of branches to benchmark. If not provided, defaults to "master"
     // (for git) or "default" (for mercurial).
@@ -44,7 +50,8 @@
     // If missing or the empty string, the tool will be automatically
     // determined by looking for tools on the PATH environment
     // variable.
-    "environment_type": "conda",
+    // "environment_type": "conda",
+    "environment_type": "virtualenv",
 
     // timeout in seconds for installing any dependencies in environment
     // defaults to 10 min
@@ -59,7 +66,7 @@
 
     // The list of conda channel names to be searched for benchmark
     // dependency packages in the specified order
-    "conda_channels": ["conda-forge", "defaults"],
+    // "conda_channels": ["conda-forge", "defaults"],
 
     // A conda environment file that is used for environment creation.
     // "conda_environment_file": "environment.yml",
@@ -68,7 +75,7 @@
     // requirements dictionary is the name of a package (in PyPI) and
     // the values are version numbers.  An empty list or empty string
     // indicates to just test against the default (latest)
-    // version. null indicates that the package is to not be
+   // version. null indicates that the package is to not be
     // installed. If the package to be tested is only available from
     // PyPi, and the 'environment_type' is conda, then you can preface
     // the package name by 'pip+', and the package will be installed
@@ -86,10 +93,10 @@
     //
     "matrix": {
         "req": {
-            // "threadpoolctl": [""],
-            // "numpy": ["1.6", "1.7"],
-            // "six": ["", null],  // test with and without six installed
-            // "pip+emcee": [""]   // emcee is only available for install with pip.
+            "build": [""],
+            "numpy": [""],
+            "charset-normalizer": [""],
+            "meson-python": [""],
         },
         // "env": {"OMP_NUM_THREADS": ["1"], "MKL_NUM_THREADS": ["1"]},
         "env_nobuild": {"OMP_NUM_THREADS": ["1"], "MKL_NUM_THREADS": ["1"]},
