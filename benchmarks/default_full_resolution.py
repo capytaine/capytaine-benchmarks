@@ -14,7 +14,10 @@ def timeraw_setup_default_solver():
 #############################################
 
 class RigidBarge:
-    def setup(self):
+    params = ([10.0, np.infty],)
+    param_names = ["water_depth",]
+
+    def setup(self, wd):
         self.solver = cpt.BEMSolver()
 
         self.barge = cpt.RectangularParallelepiped(
@@ -30,9 +33,10 @@ class RigidBarge:
             'omega': np.linspace(0.1, 4.0, 20),
             'wave_direction': [0.0, np.pi/4],
             'radiating_dof': list(self.barge.dofs.keys()),
+            'water_depth': [wd]
         })
 
-    def time_resolution(self):
+    def time_resolution(self, wd):
         self.solver.fill_dataset(self.test_matrix, [self.barge])
 
 #############################################
