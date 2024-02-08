@@ -14,7 +14,7 @@ def timeraw_setup_default_solver():
 #############################################
 
 class RigidBarge:
-    params = ([10.0, np.infty],)
+    params = ([10.0, np.inf],)
     param_names = ["water_depth",]
 
     def setup(self, wd):
